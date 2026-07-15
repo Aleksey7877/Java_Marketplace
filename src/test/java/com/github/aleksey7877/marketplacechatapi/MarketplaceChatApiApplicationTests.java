@@ -1,4 +1,4 @@
-package marketplace_chat_api;
+package com.github.aleksey7877.marketplacechatapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
