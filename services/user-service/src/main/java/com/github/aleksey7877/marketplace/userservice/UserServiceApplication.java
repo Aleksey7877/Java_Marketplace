@@ -1,12 +1,12 @@
-package com.github.aleksey7877.marketplacechatapi;
+package com.github.aleksey7877.marketplace.userservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MarketplaceChatApiApplication {
+public class UserServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MarketplaceChatApiApplication.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
     }
 }

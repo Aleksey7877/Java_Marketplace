@@ -1,0 +1,48 @@
+services:
+  user-postgres:
+    image: postgres:17-alpine
+    container_name: marketplace-user-postgres
+
+    environment:
+      POSTGRES_DB: marketplace_users
+      POSTGRES_USER: marketplace
+      POSTGRES_PASSWORD: marketplace
+
+    ports:
+      - "1011:5432"
+
+    volumes:
+      - user_postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U marketplace -d marketplace_users"
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  user-service:
+    build:
+      context: .
+      dockerfile: services/user-service/Dockerfile
+
+    container_name: marketplace-user-service
+
+    environment:
+      SERVER_PORT: 8081
+      DB_URL: jdbc:postgresql://user-postgres:5432/marketplace_users
+      DB_USER: marketplace
+      DB_PASSWORD: marketplace
+
+    ports:
+      - "8081:8081"
+
+    depends_on:
+      user-postgres:
+        condition: service_healthy
+
+volumes:
+  user_postgres_data:
