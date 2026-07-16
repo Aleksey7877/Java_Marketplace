@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -68,5 +70,26 @@ public class UserRepository {
                 )
                 .createdAt(createdAt.toInstant())
                 .build();
+    }
+
+    public Optional<User> findById(long id) {
+        String sql = """
+            select id,
+                   username,
+                   email,
+                   password_hash,
+                   role,
+                   created_at
+            from users
+            where id = ?
+            """;
+
+        List<User> users = jdbcTemplate.query(
+                sql,
+                this::mapRow,
+                id
+        );
+
+        return users.stream().findFirst();
     }
 }
