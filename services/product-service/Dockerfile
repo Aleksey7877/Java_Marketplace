@@ -21,12 +21,12 @@ copy services/user-service/build.gradle \
 copy services/product-service/build.gradle \
      ./services/product-service/build.gradle
 
-copy services/user-service/src \
-     ./services/user-service/src
+copy services/product-service/src \
+     ./services/product-service/src
 
 run chmod +x gradlew
 
-run ./gradlew :services:user-service:bootJar --no-daemon
+run ./gradlew :services:product-service:bootJar --no-daemon
 
 
 from eclipse-temurin:21-jre
@@ -34,10 +34,10 @@ from eclipse-temurin:21-jre
 workdir /app
 
 copy --from=build \
-     /workspace/services/user-service/build/libs/*.jar \
+     /workspace/services/product-service/build/libs/*.jar \
      app.jar
 
-expose 8081
-expose 9091
+expose 8082
+expose 9092
 
 entrypoint ["java", "-jar", "app.jar"]

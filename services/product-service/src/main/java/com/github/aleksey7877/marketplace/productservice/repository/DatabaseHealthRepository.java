@@ -1,4 +1,4 @@
-package com.github.aleksey7877.marketplace.userservice.repository;
+package com.github.aleksey7877.marketplace.productservice.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
