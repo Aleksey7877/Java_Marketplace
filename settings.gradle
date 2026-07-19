@@ -1,3 +1,5 @@
 rootProject.name = 'java-marketplace'
 
+include 'contracts:grpc-contracts'
 include 'services:user-service'
+include 'services:product-service'
